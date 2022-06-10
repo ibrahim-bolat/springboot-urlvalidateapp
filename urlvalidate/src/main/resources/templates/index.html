@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Url Validate Application</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.png}"/>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Anasayfa
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-5">
+          <div class="table-responsive">
+              <h3>RFC 3986 Karakter Kodlama Tablosu</h3>
+              <table class="table table-hover table-striped table-bordered" style="border: black 2px solid !important;">
+                  <caption class="fst-italic">1 Ayrılmış karakterlerin sadece ayrılmış amaçları için kullanılmadıklarında kodlanması gerekir.</caption>
+                  <thead>
+                  <tr>
+                      <th>Sınıflandırma</th>
+                      <th>Dahil Edilen Karakterler</th>
+                      <th>Kodlama Gereklimi</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <td>Güvenli karakterler</td>
+                      <td>Alfanümerik [0-9a-zA-Z]ve ayrılmamış karakterler. Ayrıca ayrılmış amaçlar için kullanıldığında ayrılmış karakterler (örneğin, bir sorgu dizesini belirtmek için kullanılan soru işareti)</td>
+                      <td>Hayır</td>
+                  </tr>
+                  <tr>
+                      <td>Ayrılmamış karakterler</td>
+                      <td> - . _ ~ (boşluk içermez)</td>
+                      <td>Hayır</td>
+                  </tr>
+                  <tr>
+                      <td>Ayrılmış karakterler</td>
+                      <td> : / ? # [ ] @ ! $ & ' ( ) * + , ; = (boşluk içermez)</td>
+                      <td>Evet</td>
+                  </tr>
+                  <tr class="alert-warning">
+                      <td>Güvenli olmayan karakterler</td>
+                      <td> Boş alanı içerir ve " < > % { } | \ ^ ` </td>
+                      <td>Evet(1)</td>
+                  </tr>
+                  <tr>
+                      <td>ASCII Kontrol karakterleri</td>
+                      <td> ISO-8859-1 (ISO-Latin) karakter aralıklarını 00-1F hex (0-31 ondalık) ve 7F (127 ondalık) içerir.</td>
+                      <td>Evet</td>
+                  </tr>
+                  <tr>
+                      <td>ASCII olmayan karakterler</td>
+                      <td> ISO-Latin seti 80-FF hex'in (128-255 ondalık) tüm "üst yarısını" içerir.</td>
+                      <td>Evet</td>
+                  </tr>
+                  <tr>
+                      <td>Diğer tüm karakterler</td>
+                      <td> Yukarıda belirtilmeyen herhangi bir karakter(ler) yüzde olarak kodlanmalıdır .</td>
+                      <td>Evet</td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="col-lg-7">
+         <form class="g-3">
+        <div class="form-group">
+            <h3>Url Doğrulama</h3>
+            <textarea class="form-control" id="url_control" placeholder="Url Gir" rows="20" required></textarea>
+        </div>
+             <div class="form-group mt-2">
+                 <h4>Uyarılar</h4>
+                 <p class="fst-italic">URL lerin (Enter) tuşuna göre ayrılmış olmasına dikkat ediniz.</p>
+             </div>
+             <div class="form-group mt-3">
+                 <button type="button" class="btn btn-danger col-sm-4 ms-1" onclick="emptyTable();">Tablo Sil</button>
+                 <button type="button" class="btn btn-success col-sm-3" onclick="fixUrls();">Düzenle</button>
+                 <button type="button" class="btn btn-primary col-sm-4 ms-1" onclick="urlValidate();">Kontrol Et</button>
+             </div>
+        </form>
+    </div>
+    </div>
+    <div class="row mt-2">
+        <div class="table-responsive" id="resultValidate">
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/sweetalert2.all.min.js}"></script>
+<script th:src="@{/js/myurlvalidate.js}"></script>
+
+</body>
+</html>
